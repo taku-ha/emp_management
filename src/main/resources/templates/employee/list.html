@@ -89,6 +89,11 @@
         </li>
       </ol>
 
+      <form th:action="@{/employee/showList}" method="get">
+        名前：<input type="text" name="name" th:value="${name}"/>
+        <button>検索</button>
+      </form>
+
       <!-- table -->
       <div class="row">
         <div
@@ -125,6 +130,10 @@
               </tr>
             </tbody>
           </table>
+
+          <div>
+            <p th:text="${errorDuplicateMessage}">該当する従業員は見つかりませんでした</p>
+          </div>
 
           <!-- ここから下を編集する必要はありません -->
         </div>
