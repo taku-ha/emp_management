@@ -79,7 +79,6 @@ public class AdministratorController {
 							,BindingResult result
 							
 							) {
-
 		if(result.hasErrors()) {
 			return toInsert();
 		}
