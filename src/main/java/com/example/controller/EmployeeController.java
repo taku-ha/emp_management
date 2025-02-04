@@ -49,9 +49,13 @@ public class EmployeeController {
 	 * @return 従業員一覧画面
 	 */
 	@GetMapping("/showList")
-	public String showList(Model model) {
-		List<Employee> employeeList = employeeService.showList();
+	public String showList(String name, Model model) {
+		List<Employee> employeeList = employeeService.showList(name);
+		if (employeeList.isEmpty()) {
+			model.addAttribute("errorDuplicateMessage", "該当する従業員は見つかりませんでした");
+		}
 		model.addAttribute("employeeList", employeeList);
+		model.addAttribute("name", name);
 		return "employee/list";
 	}
 
