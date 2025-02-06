@@ -27,13 +27,14 @@ public class EmployeeService {
 	 * 
 	 * @return 従業員情報一覧
 	 */
+	
 	public List<Employee> showList(String name) {
 		List<Employee> employeeList = employeeRepository.findAll();
 		if (name == null || employeeList.isEmpty()) {
 			return employeeRepository.findAll();
-		}else {
-			return employeeRepository.findByName(name);
 		}
+
+		return employeeRepository.findByName(name);
 		
 	}
 
