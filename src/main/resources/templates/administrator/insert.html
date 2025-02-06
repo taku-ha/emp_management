@@ -82,10 +82,11 @@
                     <div class="col-sm-12">
                       <label for="mailAddress"> メールアドレス: </label>
                       <label
-                      th:errors="*{mailAddress}"
-                      class="error-messages"
-                    >メールアドレスを入力してください
-                      </label>
+                        th:errors="*{mailAddress}"
+                        class="error-messages"
+                      >
+                      メールアドレスを入力してください</label>
+                      <label th:if="${errorMessage}" th:text="${errorMessage}" class="error-messages"></label>
                       <input
                         type="text"
                         name="mailAddress"

@@ -78,11 +78,8 @@ public class AdministratorController {
 	@PostMapping("/insert")
 	public String insert(
 		@Valid InsertAdministratorForm form,
-		BindingResult result,
-		RedirectAttributes redirectAttributes
-	) {if (administratorService.isMailAddressDuplicate(form.getMailAddress())) {
-			result.rejectValue("mailAddress", "error.mailAddress", "このメールアドレスはすでに使用されています");
-		}
+		BindingResult result
+		) {
 		if (result.hasErrors()) {
 			return "administrator/insert"; 
 		}
@@ -90,7 +87,6 @@ public class AdministratorController {
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-
 		return "redirect:";  // 従業員一覧画面にリダイレクト
 	}
 
