@@ -21,7 +21,6 @@ public class InsertAdministratorForm {
 	@NotBlank(message = "メールアドレスを入力してください")
 	@Size(max = 100, message = "メールアドレスは100文字以下で入力してください")
 	@Email(message = "メールアドレスの形式が不正です")
-	
 	private String mailAddress;
 	/** パスワード */
 	@NotNull(message = "パスワードを入力してください")

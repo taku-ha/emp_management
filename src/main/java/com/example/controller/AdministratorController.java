@@ -3,7 +3,7 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +18,7 @@ import com.example.form.LoginForm;
 import com.example.service.AdministratorService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 /**
  * 管理者情報を操作するコントローラー.
@@ -75,18 +76,22 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@PostMapping("/insert")
-	public String insert(@Validated InsertAdministratorForm form
-							,BindingResult result
-							
-							) {
-		if(result.hasErrors()) {
-			return toInsert();
+	public String insert(
+		@Valid InsertAdministratorForm form,
+		BindingResult result,
+		RedirectAttributes redirectAttributes
+	) {if (administratorService.isMailAddressDuplicate(form.getMailAddress())) {
+			result.rejectValue("mailAddress", "error.mailAddress", "このメールアドレスはすでに使用されています");
 		}
+		if (result.hasErrors()) {
+			return "administrator/insert"; 
+		}
+
 		Administrator administrator = new Administrator();
-		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "employee/list";
+
+		return "redirect:";  // 従業員一覧画面にリダイレクト
 	}
 
 	/////////////////////////////////////////////////////

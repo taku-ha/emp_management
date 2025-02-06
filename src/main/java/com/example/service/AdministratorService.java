@@ -40,4 +40,10 @@ public class AdministratorService {
 		Administrator administrator = administratorRepository.findByMailAddressAndPassward(mailAddress, password);
 		return administrator;
 	}
+
+	public boolean isMailAddressDuplicate(String mailAddress) {
+        Administrator administrator = administratorRepository.findByMailAddress(mailAddress);
+        return administrator != null;
+	}
 }
+
